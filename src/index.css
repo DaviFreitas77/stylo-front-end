@@ -1,0 +1,27 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+.swiper-pagination-bullet {
+  background-color: #d1d5db !important; /* gray-300 */
+  opacity: 1 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #1f2937 !important; /* gray-800 */
+}
+
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: #000 !important; 
+  font-size: 24px !important;
+  width: 40px !important;
+  height: 40px !important;
+}
+
+/* Opcional: colocar fundo ou borda */
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 20px !important; /* seta interna */
+}

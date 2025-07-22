@@ -2,6 +2,7 @@
 import Header from "@/components/Header"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { Link } from "react-router-dom";
 // CSS do Swiper
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -10,8 +11,14 @@ import 'swiper/css/scrollbar'
 import Button from '@/components/ButtonWhatsap';
 import SliderBanner from '@/components/SliderBanner';
 import Footer from "@/components/Footer/indesx";
+import useProductFeatured from "@/hooks/useProductFeatured";
+import { Skeleton } from "@/components/ui/skeleton";
+
 
 function Home() {
+
+  const { data: products, isLoading, error } = useProductFeatured()
+
 
 
   return (
@@ -33,79 +40,57 @@ function Home() {
             <Swiper
               modules={[Navigation, Pagination, Autoplay]}
               spaceBetween={2}
-              slidesPerView={3}
+              slidesPerView="auto"
               autoplay={{
                 delay: 4000,
                 // disableOnInteraction: false
               }}
-              breakpoints={{
-                768: {
-                  slidesPerView: 3,
-                },
-                0: {
-                  slidesPerView: 2,
-                }
-              }}
+
 
               navigation={false}
               pagination={{ clickable: true }}
               className="flex items-center justify-center"
             >
+              {products ? products.map((item) => (
+                <SwiperSlide key={item.id} className="bg-[#F2EEEB] cursor-pointer !w-[120px] sm:!w-[240px] md:!w-[280px]">
+                  <Link key={item.id} to={`/infoProduct/${item.id}`} >
+                    <div className="flex flex-col items-center justify-center h-full py-4">
+                      <img
+                        src={item.image}
+                        alt=""
+                        className="w-[70%]  object-contain mb-2 hover:scale-105 transform transition-transform duration-500"
+                      />
+                      <div className="text-center">
+                        <p className="text-gray-800 font-semibold text-[13px] md:text-base">{item.name}</p>
 
-              <SwiperSlide className="bg-[#F2EEEB] cursor-pointer">
-                <div className="flex flex-col items-center justify-center h-full py-4">
-                  <img
-                    src="img/vestido.png"
-                    alt=""
-                    className="w-[70%]  object-contain mb-2 hover:scale-105 transform transition-transform duration-500"
-                  />
-                  <div className="text-center">
-                    <p className="text-gray-800 font-semibold text-[13px] md:text-base">Vestido Elegante</p>
-                    <p className="text-gray-500 font-bold text-[13px] md:text-base mt-1">R$ 200,00</p>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide className="bg-[#F2EEEB] cursor-pointer">
-                <div className="flex flex-col items-center justify-center h-full py-4">
-                  <img
-                    src="img/vestido.png"
-                    alt=""
-                      className="w-[70%]  object-contain mb-2 hover:scale-105 transform transition-transform duration-500"
-                  />
-                  <div className="text-center">
-                    <p className="text-gray-800 font-semibold text-[13px] md:text-base">Vestido Elegante</p>
-                    <p className="text-gray-500 font-bold text-[13px] md:text-base mt-1">R$ 200,00</p>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide className="bg-[#F2EEEB] cursor-pointer">
-                <div className="flex flex-col items-center justify-center h-full py-4">
-                  <img
-                    src="img/vestido.png"
-                    alt=""
-                      className="w-[70%]  object-contain mb-2 hover:scale-105 transform transition-transform duration-500"
-                  />
-                  <div className="text-center">
-                    <p className="text-gray-800 font-semibold text-[13px] md:text-base">Vestido Elegante</p>
-                    <p className="text-gray-500 font-bold text-[13px] md:text-base mt-1">R$ 200,00</p>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide className="bg-[#F2EEEB] cursor-pointer">
-                <div className="flex flex-col items-center justify-center h-full py-4">
-                  <img
-                    src="img/vestido.png"
-                    alt=""
-                      className="w-[70%]  object-contain mb-2 hover:scale-105 transform transition-transform duration-500"
-                  />
-                  <div className="text-center">
-                    <p className="text-gray-800 font-semibold text-[13px] md:text-base">Vestido Elegante</p>
-                    <p className="text-gray-500 font-bold text-[13px] md:text-base mt-1">R$ 200,00</p>
-                  </div>
-                </div>
-              </SwiperSlide>
+                        <div className="text-center">
+                          {item.lastPrice && (
+                            <del className="text-gray-400 font-semibold text-[10px] md:text-sm block">
+                              {Number(item.lastPrice).toLocaleString('pt-BR', {
+                                style: "currency",
+                                currency: "BRL"
+                              })}
+                            </del>
+                          )}
+                          <p className="text-gray-800 font-bold text-[13px] md:text-base mt-1">
+                            {Number(item.price).toLocaleString('pt-BR', {
+                              style: "currency",
+                              currency: "BRL"
+                            })}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                </SwiperSlide>
+              )) : (
+                [...Array(4)].map((_, i) => (
+                  <SwiperSlide key={i} className="!w-[120px] sm:!w-[240px] md:!w-[280px] flex justify-center items-center ">
+                    <Skeleton className="w-full h-full rounded-xl bg-gray-200" />
+                  </SwiperSlide>
+                ))
 
-
+              )}
             </Swiper>
           </div>
 
@@ -155,8 +140,8 @@ function Home() {
 
           </div>
         </div>
-
         <Button />
+
         <Footer />
       </div>
     </>

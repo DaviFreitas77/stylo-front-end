@@ -23,7 +23,7 @@ export default function Header() {
             setUp(true)
         }
     })
-    console.log(scrollY)
+
 
     return (
         <>

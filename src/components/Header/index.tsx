@@ -42,7 +42,7 @@ export default function Header() {
 
                     <img
                         className="absolute left-1/2 transform -translate-x-1/2 w-[120px] sm:w-[150px]"
-                        src="img/logo.png"
+                        src="/img/logo.png"
                         alt="Logo"
                     />
 

@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useForm } from 'react-hook-form';
 import { GiPlainCircle } from "react-icons/gi";
 import UploadImage from "@/components/UploadImage/uploadImage";
-
+import { toast } from "sonner"
 
 type FormData = {
     name: string;
@@ -67,17 +67,23 @@ export default function Admin() {
         }
         console.log(data)
         try {
-            const res = await fetch('http://127.0.0.1:8000/api/registerProduct', {
+            const res = await fetch('http://127.0.0.1:8000/api/adm/registerProduct', {
                 method: "post",
                 headers: {
                     'Accept': "application/json",
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    // "Authorization": `Bearer 22|frSg9aKIDGMWDdXK2Vf2ZumjAazvjgFLySVH7C3Qee80d41e`
                 },
                 body: JSON.stringify(payload)
             })
 
             const data = await res.json()
-            console.log(data)
+            
+            if(res.ok){
+               return toast.success("produto cadastrado")
+            }
+            
+            return toast.error("você não tem autorização ")
         } catch (error) {
             console.log(error)
         } finally {

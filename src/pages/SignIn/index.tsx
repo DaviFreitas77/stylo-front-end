@@ -1,11 +1,14 @@
 import { useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
-import { FcGoogle } from 'react-icons/fc';
 import { Link } from 'react-router-dom';
 import useLogin from '@/hooks/useMutation/useLogin';
 import { toast } from "sonner"
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { GoogleLogin } from '@react-oauth/google';
+import useJwt from '@/hooks/useMutation/useJwt';
+
+
 type Form = {
     email: string,
     password: string
@@ -15,19 +18,47 @@ export default function SignIn() {
     const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm<Form>()
     const { mutate, isSuccess, isError } = useLogin()
+    const { mutate: reqToken, isSuccess: successToken, isError: errorToken } = useJwt()
 
-    
+
+    const handleGoogleSuccess = (credentialResponse: any) => {
+        console.log('Google Credential:', credentialResponse);
+        reqToken(credentialResponse.credential, {
+            onSuccess: (response) => {
+                toast.success("Login realizado com sucesso:")
+                localStorage.setItem("token", response.token)
+                localStorage.setItem("name", response.user.name)
+                localStorage.setItem("email", response.user.email)
+                navigate("/inicio")
+
+            },
+            onError: (response) => {
+                console.log(response)
+            }
+        })
+
+    };
+
+    useEffect(() => {
+        const token = localStorage.getItem("token")
+
+        if (token) {
+            navigate("/inicio")
+        }
+    }, [])
 
 
     const login = (data: any) => {
-        mutate(data,{
-            onSuccess:(response)=>{
+        mutate(data, {
+            onSuccess: (response) => {
                 toast.success("Login realizado com sucesso:")
-                console.log("Login realizado com sucesso:",response);
+                localStorage.setItem("token", response.access_token)
+                localStorage.setItem("name", response.user.name)
+                localStorage.setItem("email", response.user.email)
                 navigate("/inicio")
             },
-            onError:(response:any)=>{
-              toast.error("credenciais inválidas")
+            onError: (response: any) => {
+                toast.error("credenciais inválidas")
             }
         })
 
@@ -71,13 +102,15 @@ export default function SignIn() {
                         </Button>
                         ou
 
-                        <Button
-                            type="button"
-                            className="cursor-pointer w-full h-12 flex items-center justify-center gap-3 border border-gray-300 rounded hover:bg-gray-100 transition-colors"
-                        >
-                            <FcGoogle size={20} />
-                            <span className="text-sm text-gray-700 font-medium">Entrar com Google</span>
-                        </Button>
+                        <GoogleLogin
+                            onSuccess={handleGoogleSuccess}
+                            onError={() => {
+                                console.log('Login Failed');
+                            }}
+                        />
+
+
+
 
                     </div>
                     <div className='flex gap-2'>

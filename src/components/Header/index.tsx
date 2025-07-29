@@ -24,6 +24,9 @@ export default function Header() {
         }
     })
 
+    const name = localStorage.getItem("name")
+    const firstLetter = name?.charAt(0)
+
 
     return (
         <>
@@ -47,9 +50,8 @@ export default function Header() {
                     />
 
 
-                    <Avatar>
-                        <AvatarImage src="https://github.com/shadcn.png" />
-                        <AvatarFallback>CN</AvatarFallback>
+                    <Avatar className="bg-[#F2EEEB]">
+                        <AvatarFallback >{firstLetter}</AvatarFallback>
                     </Avatar>
                 </div>
 

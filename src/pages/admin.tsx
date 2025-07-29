@@ -28,6 +28,7 @@ export default function Admin() {
     const [sizeSelected, setSizeSelected] = useState<number[]>([])
     const [colorSelected, setColorSelected] = useState<number[]>([])
     const [imageUrl, setImageUrl] = useState<string>('');
+    const token = localStorage.getItem("token")
 
 
     const addSize = (id: number) => {
@@ -72,17 +73,17 @@ export default function Admin() {
                 headers: {
                     'Accept': "application/json",
                     "Content-Type": "application/json",
-                    // "Authorization": `Bearer 22|frSg9aKIDGMWDdXK2Vf2ZumjAazvjgFLySVH7C3Qee80d41e`
+                    "Authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify(payload)
             })
 
             const data = await res.json()
-            
-            if(res.ok){
-               return toast.success("produto cadastrado")
+
+            if (res.ok) {
+                return toast.success("produto cadastrado")
             }
-            
+
             return toast.error("você não tem autorização ")
         } catch (error) {
             console.log(error)
@@ -98,6 +99,7 @@ export default function Admin() {
 
     return (
         <div className="flex items-center justify-center">
+            
             <form
                 onSubmit={handleSubmit(registerProduct)}
                 className="w-[60%] mt-9"
@@ -261,8 +263,8 @@ export default function Admin() {
                 {/* Botão de envio */}
                 <div className="mt-4">
                     <button
-                        type="submit"
-                        className="px-6 py-2 bg-black cursor-pointer text-white rounded-md transition"
+                        type={`${imageUrl ? 'submit' : 'button'}`}
+                        className={`px-6 py-2 ${imageUrl ? 'bg-black cursor-pointer' : "bg-gray-600"}  text-white rounded-md transition`}
                     >
                         Enviar
                     </button>

@@ -57,8 +57,8 @@ export default function SignIn() {
                 localStorage.setItem("email", response.user.email)
                 navigate("/inicio")
             },
-            onError: (response: any) => {
-                toast.error("credenciais inválidas")
+            onError: (error: any) => {
+                toast.error(error.message)
             }
         })
 

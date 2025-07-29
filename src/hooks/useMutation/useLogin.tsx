@@ -17,7 +17,7 @@ export default function useLogin() {
             const data = await res.json();
 
             if (!res.ok) {
-              throw new Error(data.message || "Erro desconhecido");
+              throw new Error(data.message);
             }
             return data;
 

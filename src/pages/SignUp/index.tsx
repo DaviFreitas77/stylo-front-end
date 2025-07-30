@@ -3,9 +3,11 @@ import { Button } from '@/components/ui/button';
 import { FcGoogle } from 'react-icons/fc';
 import { Link } from 'react-router-dom';
 import UseCreateUser from '@/hooks/useMutation/useCreateUser';
+import { useNavigate } from 'react-router-dom';
 
 import { toast } from "sonner"
 import { useEffect } from 'react';
+
 type Form = {
     name: string,
     email: string,
@@ -13,19 +15,38 @@ type Form = {
 }
 
 export default function SignUp() {
+    const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm<Form>()
     const { mutate, isSuccess, isError } = UseCreateUser();
-    useEffect(() => {
-        if (isSuccess) {
-            toast.success("Usuário criado com sucesso! estamos te redirecioando...");
-        }
-    }, [isSuccess]);
 
+
+    useEffect(() => {
+        const token = localStorage.getItem("token")
+
+        if (token) {
+            navigate("/inicio")
+        }
+    }, [])
 
 
     const registerUser = (data: Form) => {
+        mutate(data, {
+            onSuccess: (response) => {
+                toast(response.message)
+                console.log(response)
+                localStorage.setItem("token", response.access_token)
+                localStorage.setItem("name", response.user.name)
+                localStorage.setItem("email", response.user.email)
+                setTimeout(() => {
+                    navigate("/inicio")
+                }, 2000);
+            },
+            onError: (error: any) => {
+                console.log(error)
+                toast(error.message)
+            }
+        })
 
-        mutate(data);
     };
     return (
         <div className="flex h-[100vh]  justify-between">

@@ -1,8 +1,7 @@
-
 export type ProductFeatured = {
-    id:number,
-    name:string,
-    price:string,
-    lastPrice:string,
-    image:string
-}
+  id: number;
+  name: string;
+  price: string;
+  lastPrice: string;
+  image:string;
+};

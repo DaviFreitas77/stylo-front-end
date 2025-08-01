@@ -5,8 +5,13 @@
 .swiper-pagination-bullet {
   background-color: #d1d5db !important; /* gray-300 */
   opacity: 1 !important;
-}
 
+}
+.swiper-pagination {
+  bottom: 15px !important; /* desce 30px abaixo do slide */
+  position: relative !important; /* ou absolute se quiser fixo no container */
+  margin-top: 20px; /* espaço extra se precisar */
+}
 .swiper-pagination-bullet-active {
   background-color: #1f2937 !important; /* gray-800 */
 }

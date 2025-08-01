@@ -21,6 +21,11 @@ type FormData = {
 
 };
 
+type Variation = {
+    colorId: number;
+    imageUrl: string;
+    sizes: number[];
+};
 
 export default function Admin() {
     const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>
@@ -35,42 +40,48 @@ export default function Admin() {
     const token = localStorage.getItem("token")
     const [modalvisible, setModalVisible] = useState<boolean>(false)
     const [category, setCategory] = useState('')
+    const [variation, setVariation] = useState<Variation[]>([])
 
-
-    const addSize = (id: number) => {
-        if (sizeSelected.includes(id)) {
-
-            const update = sizeSelected.filter(item => item !== id);
-            setSizeSelected(update);
-        } else {
-            // Adiciona o tamanho
-            setSizeSelected([...sizeSelected, id]);
-        }
-
+    console.log(token)
+    console.log(variation)
+    const addSize = (id: number, colorId: number) => {
+        setVariation(variation.map(v => {
+            if (v.colorId === colorId) {
+                const hasSize = v.sizes.includes(id)
+                return {
+                    ...v,
+                    sizes: hasSize
+                        ? v.sizes.filter(s => s !== id)
+                        : [...v.sizes, id]
+                };
+            }
+            return v;
+        }))
     };
 
     const addColor = (id: number) => {
         if (colorSelected.includes(id)) {
             const update = colorSelected.filter(item => item !== id);
             setColorSelected(update)
+            setVariation(variation.filter(v => v.colorId !== id));
         } else {
             setColorSelected([...colorSelected, id])
+            setVariation([...variation, { colorId: id, sizes: [], imageUrl: "" }]);
+
         }
     }
 
 
     const registerProduct = async (data: FormData) => {
-        console.log(sizeSelected)
+        console.log(variation)
         const payload = {
             name: data.name,
             description: data.description,
             price: data.price,
             lastPrice: data.lastprice,
             idCategory: data.category,
-            colors: colorSelected,
-            sizes: sizeSelected,
-            image: imageUrl,
-            news: data.news
+            news: data.news,
+            variation
         }
         console.log(data)
         try {
@@ -89,14 +100,12 @@ export default function Admin() {
             if (res.ok) {
                 return toast.success("produto cadastrado")
             }
-
+            console.log(data)
             return toast.error("você não tem autorização ")
         } catch (error) {
             console.log(error)
         } finally {
-            setSizeSelected([]);
-            setColorSelected([]);
-            setImageUrl('');
+
             reset();
         }
 
@@ -112,6 +121,12 @@ export default function Admin() {
             }
         })
     }
+
+    const setImageForColor = (colorId: number, url: string) => {
+        setVariation(variation.map(v =>
+            v.colorId === colorId ? { ...v, imageUrl: url } : v
+        ));
+    };
 
     return (
         <div >
@@ -241,7 +256,7 @@ export default function Admin() {
                     </div>
                     <div className="flex flex-wrap gap-10 mt-5">
                         {/* Seleção de Tamanhos */}
-                        <div className="flex-1 min-w-[200px]">
+                        {/* <div className="flex-1 min-w-[200px]">
                             <h2 className="text-lg font-semibold mb-2">Selecione o tamanho</h2>
                             <div className="flex flex-wrap gap-2">
                                 {sizes && sizes.map((item) => (
@@ -256,11 +271,11 @@ export default function Admin() {
                                     </button>
                                 ))}
                             </div>
-                        </div>
+                        </div> */}
                         {/* Seleção de Cores */}
                         <div className="flex-1 min-w-[200px]">
                             <h2 className="text-lg font-semibold mb-2">Selecione as cores </h2>
-                            <div className="flex flex-wrap gap-3">
+                            <div className="flex flex-wrap gap-3 max-w-[250px]">
                                 {colors && colors.map((item) => (
                                     <button
                                         onClick={() => addColor(item.id)}
@@ -274,13 +289,47 @@ export default function Admin() {
                                 ))}
                             </div>
                         </div>
+                        <div className="max-w-[400px]">
+                            {colorSelected.map((corId) => {
+                                const variacao = variation.find(v => v.colorId === corId);
+                                return (
+                                    <div className="flex-1 min-w-[200px] mb-4">
+                                        <h2 className="text-lg font-semibold mb-2">Cor ID: {corId}</h2>
+                                        <div className="mb-2">
+                                            <UploadImage onUploadComplete={(url) => setImageForColor(corId, url)} />
+                                            {variacao?.imageUrl && (
+                                                <img src={variacao.imageUrl} alt="Preview" className="w-25 h-25 object-contain  mt-2 rounded" />
+                                            )}
+                                        </div>
+                                        <div className="flex flex-wrap gap-2">
+                                            {sizes && sizes.map(size => {
+                                                const selected = variacao?.sizes.includes(size.id);
+                                                return (
+                                                    <button
+                                                        onClick={() => addSize(size.id, corId)}
+                                                        type="button"
+                                                        key={size.id}
+                                                        className={`px-4 py-2 border border-gray-300 rounded-md shadow-sm transition cursor-pointer
+                                             ${selected ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'
+                                                            }`}
+                                                    >
+                                                        {size.name}
+                                                    </button>
+                                                )
+                                            })}
+                                        </div>
+                                    </div>
+                                )
+                            })}
+                        </div>
                         {/* imagem */}
-                        <UploadImage onUploadComplete={(url) => setImageUrl(url)} />
+                        {/* <UploadImage onUploadComplete={(url) => setImageUrl(url)} /> */}
                     </div>
                     {/* Botão de envio */}
                     <div className="mt-4">
                         <button
-                            type={`${imageUrl ? 'submit' : 'button'}`}
+                            type="submit"
+
                             className={`px-6 py-2 ${imageUrl ? 'bg-black cursor-pointer' : "bg-gray-600"}  text-white rounded-md transition`}
                         >
                             Enviar

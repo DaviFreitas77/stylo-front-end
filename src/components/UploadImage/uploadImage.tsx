@@ -33,7 +33,7 @@ export default function UploadImage({ onUploadComplete }: Props) {
     
     return (
         <div className="flex-1 min-w-[200px]">
-            <h2 className="text-lg font-semibold mb-2">Selecione a imagem </h2>
+           
             <div className="flex flex-wrap gap-3">
                 <input type="file"
                     onChange={handleImageChange}

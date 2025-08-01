@@ -1,0 +1,129 @@
+.container-produto-categoria {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+
+    border: 1px solid #dfdfdf;
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 8px;
+
+    width: 240px;
+    min-height: 380px;
+    transition: 0.2s ease-in-out;
+}
+
+.container-produto-categoria:hover {
+    opacity: 0.9;
+    cursor: pointer;
+    transform: translateY(-3px);
+}
+
+
+
+
+.imagem-produto-categoria {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+
+
+
+.div-preco-categoria {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    width: 100%;
+}
+
+.price-produto-categoria {
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.last-price-categoria {
+    color: gray;
+    text-decoration: line-through;
+    font-size: 13px;
+}
+
+.prices-categoria,
+.nome-produto-categoria {
+    margin-left: 5px;
+}
+
+
+
+
+.icon-carrinh-categoria {
+    font-size: 20px;
+}
+
+.add-carrinho-card-categoria {
+    background-color: #000;
+    width: 40px;
+    height: 40px;
+    color: #fff;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
+.produtos-categoria {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 15px;
+}
+
+
+
+
+@media (max-width: 1024px) {
+    .container-produto-categoria {
+        width: 200px;
+        min-height: 380px;
+    }
+
+    .imagem-produto-categoria {
+        height: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container-produto-categoria {
+        width: 180px;
+        min-height: 380px;
+    }
+
+    .imagem-produto-categoria {
+        height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .produtos-categoria {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+
+    .container-produto-categoria {
+        width: 100%;
+        min-height: 380px;
+    }
+
+    .imagem-produto-categoria {
+        height: 250px;
+    }
+}

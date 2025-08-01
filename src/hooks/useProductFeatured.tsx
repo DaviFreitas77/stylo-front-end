@@ -4,7 +4,7 @@ export default function useProductFeatured() {
     return useQuery<ProductFeatured[]>({
         queryKey: ['productFeatured'],
         queryFn: async () => {
-            const res = await fetch('http://127.0.0.1:8000/api/productFeatured');
+            const res = await fetch('http://192.168.15.9:8000/api/productFeatured');
 
             if (!res.ok) {
                 throw new Error('Erro ao buscar produtos');

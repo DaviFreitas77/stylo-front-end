@@ -34,7 +34,7 @@ export default function SignUp() {
             onSuccess: (response) => {
                 toast(response.message)
                 console.log(response)
-                localStorage.setItem("token", response.access_token)
+                localStorage.setItem("token", response.token)
                 localStorage.setItem("name", response.user.name)
                 localStorage.setItem("email", response.user.email)
                 setTimeout(() => {

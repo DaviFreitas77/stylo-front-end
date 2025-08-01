@@ -58,7 +58,7 @@ export default function Header() {
 
                 <div className="bg-black text-center">
                     <p className="text-white text-[12px]">
-                        Frete grátis em compras acima de R$200,00
+                        Compre direto pelo whatsApp
                     </p>
                 </div>
             </header>

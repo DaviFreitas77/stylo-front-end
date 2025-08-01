@@ -4,6 +4,7 @@ import { FaCircle } from "react-icons/fa"
 import { Button } from "@/components/ui/button"
 import useProducts from "@/hooks/useProduct"
 import { useEffect, useState } from "react"
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function InfoProduct() {
     const { id } = useParams()
@@ -26,10 +27,6 @@ export default function InfoProduct() {
 
     const filteredImage = product?.variations.find(variation => variation.color.id === selectedColorId)?.image || null;
 
-    const formtatNumber = () => {
-        const price = Number(product?.price)
-        const lastPrice = Number(product?.lastPrice)
-    }
 
 
     return (
@@ -58,7 +55,7 @@ export default function InfoProduct() {
                     </div>
 
 
-                    {filteredImage && (
+                    {filteredImage ? (
                         <div className="flex items-center justify-center w-[60%] max-w-[400px] aspect-[3/4] bg-white rounded-xl shadow-md">
                             <img
                                 src={filteredImage}
@@ -66,13 +63,37 @@ export default function InfoProduct() {
                                 className="max-h-full max-w-full object-contain"
                             />
                         </div>
+                    ) : (
+                        <div className="flex gap-4 justify-center items-center w-[100%] max-w-[400px]">
+                            <div>
+                                <Skeleton className="  w-[100px] h-[150px] rounded-xl bg-gray-200 mb-2" />
+                                <Skeleton className="  w-[100px] h-[150px] rounded-xl bg-gray-200" />
+                            </div>
+
+                            <Skeleton className="  w-[200px] h-[290px]  lg:w-[360px] lg:h-[400px] rounded-xl bg-gray-200" />
+
+                        </div>
                     )}
 
                 </div>
 
 
                 <div className="w-full lg:w-1/2 px-6 lg:px-12 py-6">
-                    <p className="text-3xl lg:text-4xl font-semibold">{product?.name}</p>
+                    {product?.name ? (
+                        <p className="text-3xl lg:text-4xl font-semibold">{product?.name}</p>
+                    ) : (
+                        <div className="">
+                            <div>
+                                <Skeleton className="  w-[240px] h-[35px]  bg-gray-200 mb-2" />
+
+                                <Skeleton className="  w-[290px] h-[10px]  bg-gray-200  mb-2 mt-6" />
+                                <Skeleton className="  w-[190px] h-[10px]  bg-gray-200" />
+                            </div>
+
+
+
+                        </div>
+                    )}
                     <p className="mt-4 text-gray-500 max-w-2xl">
                         {product?.description}
                     </p>
@@ -80,13 +101,21 @@ export default function InfoProduct() {
                     <div className="mt-6">
                         <h2 className="text-xl font-medium">Cores</h2>
                         <div className="flex gap-3 mt-2">
-                            {product?.variations && product.variations.map((item) => (
+                            {product?.variations ? product.variations.map((item) => (
                                 <button
                                     onClick={() => setSelectedColorId(item.color.id)}
                                     key={item.color.id} className={`border rounded-full p-1 hover:opacity-80 cursor-pointer ${selectedColorId === item.color.id ? 'border-2' : ''}`}>
                                     <FaCircle size={30} color={item.color.name} />
                                 </button>
-                            ))}
+                            )) : (
+
+                                <div className="flex gap-2">
+                                    <Skeleton className="  w-[40px] h-[40px] rounded-full bg-gray-200  " />
+                                    <Skeleton className="  w-[40px] h-[40px] rounded-full bg-gray-200 " />
+                                </div>
+
+
+                            )}
 
                         </div>
                     </div>
@@ -97,29 +126,35 @@ export default function InfoProduct() {
                                 ? Number(product.lastPrice).toLocaleString('pt-BR', { style: 'currency', currency: "BRL" })
                                 : null}
                         </del>
-                        <p className="text-3xl font-bold text-black">
+                        <div className="text-3xl font-bold text-black">
                             {product?.price
                                 ? Number(product.price).toLocaleString('pt-BR', { style: "currency", currency: "BRL" })
-                                : null}
-                        </p>
+                                : <Skeleton className="w-[140px] h-[35px] bg-gray-200 mt-7" />
+                            }
+                        </div>
                     </div>
+                    {filteredSizes.length > 0 ? (
+                        <div className="mt-5">
+                            <p className="text-xl font-medium mb-2">Tamanho</p>
+                            <select className="border w-[150px] rounded px-2 py-1" >
+                                <option disabled selected>Escolha o tamanho</option>
+                                {filteredSizes.map((item) => (
+                                    <option key={item.id} value={item.id}>{item.name}</option>
+                                ))}
+                            </select>
+                        </div>
+                    ) : (
+                        <Skeleton className="  w-[140px] h-[35px]  bg-gray-200 mt-7" />
+                    )}
 
-                    <div className="mt-5">
-                        <p className="text-xl font-medium mb-2">Tamanho</p>
-                        <select className="border w-[150px] rounded px-2 py-1">
-                            <option disabled selected>Escolha o tamanho</option>
-                            {filteredSizes.map((item) => (
-                                <option key={item.id} value={item.id}>{item.name}</option>
-                            ))}
+                    {product ? (
 
-
-
-                        </select>
-                    </div>
-
-                    <div className="mt-6">
-                        <Button className="bg-black text-white w-full h-12">Comprar</Button>
-                    </div>
+                        <div className="mt-6">
+                            <Button className="bg-black text-white w-full h-12">Comprar</Button>
+                        </div>
+                    ) : (
+                        <Skeleton className="  w-[100%] h-[35px]  bg-gray-200 mt-7" />
+                    )}
                 </div>
             </div>
         </div>

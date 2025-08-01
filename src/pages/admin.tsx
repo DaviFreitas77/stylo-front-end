@@ -85,7 +85,7 @@ export default function Admin() {
         }
         console.log(data)
         try {
-            const res = await fetch('http://127.0.0.1:8000/api/adm/registerProduct', {
+            const res = await fetch('http://192.168.15.9:8000/api/adm/registerProduct', {
                 method: "post",
                 headers: {
                     'Accept': "application/json",

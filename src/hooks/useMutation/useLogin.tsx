@@ -6,7 +6,7 @@ import { useMutation } from "@tanstack/react-query";
 export default function useLogin() {
     return useMutation({
         mutationFn: async (newUser: { email: string, password: string }) => {
-            const res = await fetch('http://127.0.0.1:8000/api/auth/login', {
+            const res = await fetch('http://192.168.15.9:8000/api/auth/login', {
                 method: "POST",
                 headers: {
                     'Content-Type': "application/json",

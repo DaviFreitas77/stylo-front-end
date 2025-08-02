@@ -6,15 +6,20 @@ type CardProps = {
     image: string,
     price: number,
     lastPrice: number
+  
 }
 import './style.css'
+import { useState } from "react";
 
 
 export default function Card({ name, image, price, lastPrice, id }: CardProps) {
+
+
     return (
         <div className="flex gap  justify-start items-center ">
             <Link
                 key={id}
+              
                 to={`/infoProduct/${id}`}
                 className="container-produto-categoria ml-2">
                 <div className="div-imagem-produto-categoria">

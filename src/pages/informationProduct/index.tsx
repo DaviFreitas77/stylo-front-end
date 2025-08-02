@@ -5,12 +5,19 @@ import { Button } from "@/components/ui/button"
 import useProducts from "@/hooks/useProduct"
 import { useEffect, useState } from "react"
 import { Skeleton } from "@/components/ui/skeleton";
+import useRecomendation from "@/hooks/useRecomentation"
+import Card from "@/components/Card"
+import CardSlider from "@/components/CardSlider"
 
 export default function InfoProduct() {
     const { id } = useParams()
+
     const formatId = Number(id)
     const { data: product, isLoading, error } = useProducts(formatId)
+    const { data: ProductRecomended } = useRecomendation(formatId)
     const [selectedColorId, setSelectedColorId] = useState<number | null>(null)
+
+    console.log(ProductRecomended)
 
 
     useEffect(() => {
@@ -30,9 +37,9 @@ export default function InfoProduct() {
 
 
     return (
-        <div>
+        <div className="flex flex-col justify-center items-center w-full">
             <Header />
-            <div className="flex flex-col lg:flex-row max-w-[1920px]">
+            <div className="flex flex-col lg:flex-row max-w-[1650px] ">
 
                 <div className="w-full lg:w-1/2 flex items-center justify-center gap-6 p-6">
 
@@ -156,6 +163,14 @@ export default function InfoProduct() {
                         <Skeleton className="  w-[100%] h-[35px]  bg-gray-200 mt-7" />
                     )}
                 </div>
+            </div>
+            <div className="mt-6 flex flex-col gap-4 w-full max-w-[1650px]">
+                <p className="text-3xl font-medium ml-5">Achamos que você pode gostar</p>
+                <div className="flex flex-wrap justify-center  items-center">
+                    {ProductRecomended && <CardSlider products={ProductRecomended} />}
+                    
+                </div>
+
             </div>
         </div>
     )

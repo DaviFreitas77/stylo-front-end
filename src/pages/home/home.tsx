@@ -34,7 +34,7 @@ function Home() {
         <Header />
         <SliderBanner />
 
-        <div className="w-full max-w-[1920px] mx-auto flex flex-col items-center justify-center">
+        <div className="w-full max-w-[1650px] mx-auto flex flex-col items-center justify-center">
           <h2 style={{ fontFamily: 'poppins' }} className="text-center text-3xl m-10 font-poppins md:text-3xl lg:text-5xl">Novidades em alta</h2>
 
           <div className="flex w-full">
@@ -75,7 +75,7 @@ function Home() {
             <div className="justify-center  !xl:w-[100%]  flex-wrap hidden lg:flex gap-3">
               <div className="justify-center  !xl:w-[100%]  flex-wrap hidden lg:flex gap-3">
                 {filteredCategory && filteredCategory.map((item) => (
-                  <Card key={item.id} name={item.name} price={Number(item.price)} image={item.image} lastPrice={Number(item.lastPrice)} id={item.id} />
+                  <Card key={item.id} name={item.name} price={Number(item.price)} image={item.image} lastPrice={Number(item.lastPrice)} id={item.id}  />
                 ))}
               </div>
                  <button className="bg-black text-white h-[40px] w-[270px]  rounded-bl-2xl rounded-tr-2xl cursor-pointer hover:opacity-85 ">Ver todos os produtos</button>

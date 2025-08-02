@@ -12,6 +12,7 @@ type Product = {
     image: string
     price: string | number;
     lastPrice: string | number;
+  
 }
 
 type CardSliderProps = {
@@ -30,6 +31,7 @@ export default function CardSlider({ products }: CardSliderProps) {
                 640: { slidesPerView: 3 },
                 768: { slidesPerView: 4 },
                 1024: { slidesPerView: 4 },
+                1280:{slidesPerView: 5 }
             }}
             autoplay
             className="w-[100%]"
@@ -42,6 +44,7 @@ export default function CardSlider({ products }: CardSliderProps) {
                         image={product.image}
                         price={Number(product.price)}
                         lastPrice={Number(product.lastPrice)}
+                       
                     />
                 </SwiperSlide>
             ))}

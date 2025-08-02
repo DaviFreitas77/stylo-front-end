@@ -4,4 +4,8 @@ export type ProductFeatured = {
   price: string;
   lastPrice: string;
   image:string;
+  category:{
+    id:number,
+    name:string
+  }
 };

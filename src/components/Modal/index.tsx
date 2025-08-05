@@ -1,6 +1,3 @@
-import useCreateCategory from "@/hooks/useMutation/useCreateCategory"
-import { useState } from "react"
-import { toast } from "sonner"
 
 type ModalProps = {
     openModal: boolean,

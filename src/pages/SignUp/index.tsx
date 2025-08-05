@@ -17,7 +17,7 @@ type Form = {
 export default function SignUp() {
     const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm<Form>()
-    const { mutate, isSuccess, isError } = UseCreateUser();
+    const { mutate, } = UseCreateUser();
 
 
     useEffect(() => {

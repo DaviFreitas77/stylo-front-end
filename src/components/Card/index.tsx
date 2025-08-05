@@ -9,7 +9,7 @@ type CardProps = {
   
 }
 import './style.css'
-import { useState } from "react";
+
 
 
 export default function Card({ name, image, price, lastPrice, id }: CardProps) {

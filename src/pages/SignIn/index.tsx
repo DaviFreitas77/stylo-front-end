@@ -17,8 +17,8 @@ type Form = {
 export default function SignIn() {
     const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm<Form>()
-    const { mutate, isSuccess, isError } = useLogin()
-    const { mutate: reqToken, isSuccess: successToken, isError: errorToken } = useJwt()
+    const { mutate } = useLogin()
+    const { mutate: reqToken } = useJwt()
 
 
     const handleGoogleSuccess = (credentialResponse: any) => {

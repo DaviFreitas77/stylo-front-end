@@ -30,11 +30,10 @@ type Variation = {
 export default function Admin() {
     const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>
         ();;
-    const { data: categories, isLoading, error } = useCategories();
-    const { data: colors, isLoading: isLoadingColor, error: errorColor } = useColor()
-    const { data: sizes, isLoading: isLoadingSize, error: errorSize } = useSize()
+    const { data: categories } = useCategories();
+    const { data: colors } = useColor()
+    const { data: sizes } = useSize()
     const { mutate } = useCreateCategory()
-    const [sizeSelected, setSizeSelected] = useState<number[]>([])
     const [colorSelected, setColorSelected] = useState<number[]>([])
     const [imageUrl, setImageUrl] = useState<string>('');
     const token = localStorage.getItem("token")

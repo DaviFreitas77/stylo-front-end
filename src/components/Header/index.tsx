@@ -10,7 +10,7 @@ export default function Header() {
 
 
     window.addEventListener('scroll', () => {
-        let currentScroll = window.scrollY
+        const currentScroll = window.scrollY
         setScrollY(currentScroll)
 
         if (currentScroll > scrollY) {

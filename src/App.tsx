@@ -3,7 +3,7 @@ import AppRoutes from "./routes";
 import {
   QueryClient,
   QueryClientProvider,
-  useQuery,
+
 } from '@tanstack/react-query'
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { Toaster } from "sonner";

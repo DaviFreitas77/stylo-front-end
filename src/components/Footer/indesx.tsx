@@ -21,7 +21,7 @@ export default function Footer() {
         {/* Redes sociais com ícones */}
         <div className="flex gap-4 text-2xl">
           <a
-            href="https://instagram.com/seu_perfil"
+            href="https://instagram.com/deborafreitacnb"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-pink-500 transition"

@@ -24,7 +24,7 @@ export default function SignUp() {
         const token = localStorage.getItem("token")
 
         if (token) {
-            navigate("/inicio")
+            navigate("/")
         }
     }, [])
 
@@ -38,7 +38,7 @@ export default function SignUp() {
                 localStorage.setItem("name", response.user.name)
                 localStorage.setItem("email", response.user.email)
                 setTimeout(() => {
-                    navigate("/inicio")
+                    navigate("/")
                 }, 2000);
             },
             onError: (error: any) => {

@@ -29,7 +29,7 @@ export default function SignIn() {
                 localStorage.setItem("token", response.token)
                 localStorage.setItem("name", response.user.name)
                 localStorage.setItem("email", response.user.email)
-                navigate("/inicio")
+                navigate("/")
 
             },
             onError: (response) => {
@@ -43,7 +43,7 @@ export default function SignIn() {
         const token = localStorage.getItem("token")
 
         if (token) {
-            navigate("/inicio")
+            navigate("/")
         }
     }, [])
 
@@ -55,7 +55,7 @@ export default function SignIn() {
                 localStorage.setItem("token", response.access_token)
                 localStorage.setItem("name", response.user.name)
                 localStorage.setItem("email", response.user.email)
-                navigate("/inicio")
+                navigate("/")
             },
             onError: (error: any) => {
                 toast.error(error.message)

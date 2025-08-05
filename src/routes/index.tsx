@@ -8,7 +8,7 @@ import SignUp from "@/pages/SignUp";
 export default function AppRoutes() {
   return (
     <Routes>
-      <Route path="/Inicio" element={<Home />} />
+      <Route path="/" element={<Home />} />
       <Route path="/admin" element={<Admin />} />
       <Route path="/infoProduct/:id" element={<InfoProduct />} />
       <Route path="/Login" element={<SignIn />} />

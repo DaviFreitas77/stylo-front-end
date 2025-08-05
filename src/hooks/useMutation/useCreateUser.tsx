@@ -1,11 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
-
+import url from '../../../url.json'
 
 
 export default function UseCreateUser() {
     return useMutation({
         mutationFn: async (newUser: { email: string, name: string, password: string }) => {
-            const res = await fetch('http://127.0.0.1:8000/api/auth/register', {
+            const res = await fetch(`${url.url}/api/auth/register`, {
                 method: "POST",
                 headers: {
                     'Content-Type': "application/json",

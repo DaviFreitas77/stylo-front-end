@@ -8,7 +8,7 @@ import UploadImage from "@/components/UploadImage/uploadImage";
 import { toast } from "sonner"
 import Modal from "@/components/Modal";
 import useCreateCategory from "@/hooks/useMutation/useCreateCategory";
-
+import url from '../../url.json'
 
 
 type FormData = {
@@ -42,8 +42,7 @@ export default function Admin() {
     const [category, setCategory] = useState('')
     const [variation, setVariation] = useState<Variation[]>([])
 
-    console.log(token)
-    console.log(variation)
+
     const addSize = (id: number, colorId: number) => {
         setVariation(variation.map(v => {
             if (v.colorId === colorId) {
@@ -73,19 +72,19 @@ export default function Admin() {
 
 
     const registerProduct = async (data: FormData) => {
-        console.log(variation)
+    
         const payload = {
             name: data.name,
-            description: data.description,
+            description: data.description ?? null,
             price: data.price,
             lastPrice: data.lastprice,
             idCategory: data.category,
             news: data.news,
             variation
         }
-        console.log(data)
+        console.log(payload)
         try {
-            const res = await fetch('http://192.168.15.9:8000/api/adm/registerProduct', {
+            const res = await fetch(`${url.url}/api/adm/registerProduct`, {
                 method: "post",
                 headers: {
                     'Accept': "application/json",
@@ -202,15 +201,14 @@ export default function Admin() {
                     <div className="flex flex-wrap gap-4 mt-5">
                         <div className="flex-1 min-w-[200px]">
                             <textarea
-                                {...register("description", { required: "adicione uma descrição a o produto" })}
+                                {...register("description" )}
+                                  defaultValue=""
                                 className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm
                         focus:outline-none focus:ring-2 focus:ring-gray-500
                         placeholder-gray-400 transition duration-150 ease-in-out"
                                 placeholder="digite uma descrição a o produto"
                             />
-                            {errors.description?.message && (
-                                <p className="text-[14px] text-red-600 mt-1">{errors.description.message}</p>
-                            )}
+                           
                         </div>
                         <div className="flex-1 min-w-[200px]">
                             <select

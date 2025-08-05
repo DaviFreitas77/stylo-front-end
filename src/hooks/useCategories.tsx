@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-
+import url from '../../url.json'
 
 
 export default function useCategories() {
     return useQuery({
         queryKey: ['categories'],
         queryFn: async () => {
-            const res = await fetch('http://192.168.15.9:8000/api/categories');
+            const res = await fetch(`${url.url}/api/categories`);
             if (!res.ok) {
                 throw new Error('Erro ao buscar categorias');
             }

@@ -1,11 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
 
-
+import url from '../../../url.json'
 
 export default function useCreateCategory() {
     return useMutation({
         mutationFn: async (category:string) => {
-            const res = await fetch('http://127.0.0.1:8000/api/registerCategory', {
+            const res = await fetch(`${url.url}/api/registerCategory`, {
                 method: "POST",
                 headers: {
                     'Content-Type': "application/json",

@@ -39,9 +39,9 @@ export default function InfoProduct() {
     return (
         <div className="flex flex-col justify-center items-center w-full">
             <Header />
-            <div className="flex flex-col lg:flex-row max-w-[1650px] ">
+            <div className="flex flex-col lg:flex-row  w-full 2xl:w-[1920px]">
 
-                <div className="w-full lg:w-1/2 flex items-center justify-center gap-6 p-6">
+                <div className="w-full lg:w-1/2 flex items-center justify-center gap-6 p-6 ">
 
                     {/* Thumbnails */}
                     <div className="flex flex-col gap-3 max-h-[500px]">
@@ -63,7 +63,7 @@ export default function InfoProduct() {
 
 
                     {filteredImage ? (
-                        <div className="flex items-center justify-center w-[60%] max-w-[400px] aspect-[3/4] bg-white rounded-xl shadow-md">
+                        <div className="flex items-center justify-center w-[100%] max-w-[400px] aspect-[3/4] bg-white rounded-xl shadow-md">
                             <img
                                 src={filteredImage}
                                 alt="Produto"

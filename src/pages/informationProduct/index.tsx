@@ -34,7 +34,18 @@ export default function InfoProduct() {
 
     const filteredImage = product?.variations.find(variation => variation.color.id === selectedColorId)?.image || null;
 
+    console.log(filteredImage)
 
+    const contactWhatasp = (nameProduct:string , image:string | null) => {
+   
+
+        const message = `Oi débora, fiquei interessado no produto *${nameProduct}* gostaria de saber de ainda está disponivel, confira a imagem ${image}`;
+        const encodedMessage = encodeURIComponent(message);
+
+        const whatsappUrl = `https://wa.me/5511967525037?text=${encodedMessage}`;
+
+        window.open(whatsappUrl,"_blank")
+    }
 
     return (
         <div className="flex flex-col justify-center items-center w-full">
@@ -44,7 +55,7 @@ export default function InfoProduct() {
                 <div className="w-full lg:w-1/2 flex items-center justify-center gap-6 p-6 ">
 
                     {/* Thumbnails */}
-                    <div className="flex flex-col gap-3 max-h-[500px]">
+                    <div className="flex flex-col gap-3 max-h-[250px] overflow-y-scroll">
                         {product?.variations?.map((item) => (
                             <img
                                 key={item.image}
@@ -156,8 +167,16 @@ export default function InfoProduct() {
 
                     {product ? (
 
-                        <div className="mt-6">
-                            <Button className="bg-black text-white w-full h-12">Comprar</Button>
+                        <div className="mt-6 w-full">
+                            <a
+                                onClick={()=>contactWhatasp(product.name,filteredImage || null, )}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:text-green-500 transition bg-black text-white w-full p-3 block text-center"
+                                aria-label="WhatsApp"
+                            >
+                                Comprar via WhatsApp
+                            </a>
                         </div>
                     ) : (
                         <Skeleton className="  w-[100%] h-[35px]  bg-gray-200 mt-7" />
@@ -168,7 +187,7 @@ export default function InfoProduct() {
                 <p className="text-3xl font-medium ml-5">Achamos que você pode gostar</p>
                 <div className="flex flex-wrap justify-center  items-center">
                     {ProductRecomended && <CardSlider products={ProductRecomended} />}
-                    
+
                 </div>
 
             </div>

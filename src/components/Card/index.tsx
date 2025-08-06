@@ -20,7 +20,7 @@ export default function Card({ name, image, price, lastPrice, id }: CardProps) {
             <Link
                 key={id}
               
-                to={`/infoProduct/${id}`}
+                to={`/produto/${id}`}
                 className="container-produto-categoria ml-2">
                 <div className="div-imagem-produto-categoria">
                     <img

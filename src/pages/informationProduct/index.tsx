@@ -8,7 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import useRecomendation from "@/hooks/useRecomentation"
 import Card from "@/components/Card"
 import CardSlider from "@/components/CardSlider"
-
+import { Badge } from "@/components/ui/badge"
 export default function InfoProduct() {
     const { id } = useParams()
 
@@ -17,7 +17,7 @@ export default function InfoProduct() {
     const { data: ProductRecomended } = useRecomendation(formatId)
     const [selectedColorId, setSelectedColorId] = useState<number | null>(null)
 
-    console.log(ProductRecomended)
+   
 
 
     useEffect(() => {
@@ -34,17 +34,17 @@ export default function InfoProduct() {
 
     const filteredImage = product?.variations.find(variation => variation.color.id === selectedColorId)?.image || null;
 
-    console.log(filteredImage)
 
-    const contactWhatasp = (nameProduct:string , image:string | null) => {
-   
+
+    const contactWhatasp = (nameProduct: string, image: string | null) => {
+
 
         const message = `Oi débora, fiquei interessado no produto *${nameProduct}* gostaria de saber de ainda está disponivel, confira a imagem ${image}`;
         const encodedMessage = encodeURIComponent(message);
 
         const whatsappUrl = `https://wa.me/5511967525037?text=${encodedMessage}`;
 
-        window.open(whatsappUrl,"_blank")
+        window.open(whatsappUrl, "_blank")
     }
 
     return (
@@ -98,7 +98,10 @@ export default function InfoProduct() {
 
                 <div className="w-full lg:w-1/2 px-6 lg:px-12 py-6">
                     {product?.name ? (
-                        <p className="text-3xl lg:text-4xl font-semibold">{product?.name}</p>
+                        <div>
+                            <Badge className="bg-amber-300" variant="default">{product.category}</Badge>
+                            <p className="text-3xl lg:text-4xl font-semibold">{product?.name}</p>
+                        </div>
                     ) : (
                         <div className="">
                             <div>
@@ -107,9 +110,6 @@ export default function InfoProduct() {
                                 <Skeleton className="  w-[290px] h-[10px]  bg-gray-200  mb-2 mt-6" />
                                 <Skeleton className="  w-[190px] h-[10px]  bg-gray-200" />
                             </div>
-
-
-
                         </div>
                     )}
                     <p className="mt-4 text-gray-500 max-w-2xl">
@@ -131,8 +131,6 @@ export default function InfoProduct() {
                                     <Skeleton className="  w-[40px] h-[40px] rounded-full bg-gray-200  " />
                                     <Skeleton className="  w-[40px] h-[40px] rounded-full bg-gray-200 " />
                                 </div>
-
-
                             )}
 
                         </div>
@@ -169,7 +167,7 @@ export default function InfoProduct() {
 
                         <div className="mt-6 w-full">
                             <a
-                                onClick={()=>contactWhatasp(product.name,filteredImage || null, )}
+                                onClick={() => contactWhatasp(product.name, filteredImage || null,)}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="hover:text-green-500 transition bg-black text-white w-full p-3 block text-center"

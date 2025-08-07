@@ -26,8 +26,9 @@ function Home() {
 
   const limitProduct = products?.slice(0, 6)
 
-
   const filteredCategory = allProducts?.filter(product => product.category.name.toLocaleLowerCase() === "camiseta").slice(0, 6)
+
+  const allfilteredCategory = allProducts?.filter(product => product.category.name.toLocaleLowerCase() === "camiseta")
 
   return (
     <>
@@ -63,7 +64,11 @@ function Home() {
               </div>
 
               {limitProduct && limitProduct.length >= 6 && (
-                <button className="bg-black text-white h-[40px] w-[270px]  rounded-bl-2xl rounded-tr-2xl cursor-pointer hover:opacity-85 ">Ver todos os produtos</button>
+                <Link to="produtos" state={{ products: products }}>
+                  <button
+
+                    className="bg-black text-white h-[40px] w-[270px]  rounded-bl-2xl rounded-tr-2xl cursor-pointer hover:opacity-85 ">Ver todas as novidades</button>
+                </Link>
               )}
 
             </div>
@@ -96,7 +101,10 @@ function Home() {
               )}
 
               {limitProduct && limitProduct.length >= 6 && (
-                <button className="bg-black text-white h-[40px] w-[270px]  rounded-bl-2xl rounded-tr-2xl cursor-pointer hover:opacity-85 ">Ver todos os produtos</button>
+                <Link to="produtos" state={{ products: products }}>
+                  <button className="bg-black text-white h-[40px] w-[270px]  rounded-bl-2xl rounded-tr-2xl cursor-pointer hover:opacity-85 ">Ver todas as novidades</button>
+                </Link>
+
               )}
             </div>
           </div>
@@ -119,8 +127,8 @@ function Home() {
               <div className="justify-center  !xl:w-[100%]  flex-wrap hidden lg:flex gap-3">
                 {filteredCategory ? filteredCategory.map((item) => (
                   <Card key={item.id} name={item.name} price={Number(item.price)} image={item.image} lastPrice={Number(item.lastPrice)} id={item.id} />
-                )):(
-                   <div className="flex gap-2 flex-wrap items-center justify-center ml-3">
+                )) : (
+                  <div className="flex gap-2 flex-wrap items-center justify-center ml-3">
 
                     <Skeleton className="  w-[240px] h-[370px] rounded-xl bg-gray-200 mb-2" />
                     <Skeleton className="  w-[240px] h-[370px] rounded-xl bg-gray-200 mb-2" />
@@ -132,7 +140,9 @@ function Home() {
                 )}
               </div>
               {filteredCategory && filteredCategory.length >= 6 ? (
-                <button className="bg-black text-white h-[40px] w-[270px]  rounded-bl-2xl rounded-tr-2xl cursor-pointer hover:opacity-85 ">Ver todos os produtos</button>
+                <Link to="produtos" state={{ products: allfilteredCategory }}>
+                  <button className="bg-black text-white h-[40px] w-[270px]  rounded-bl-2xl rounded-tr-2xl cursor-pointer hover:opacity-85 ">Ver todas as camisetas</button>
+                </Link>
               ) : null}
 
             </div>
@@ -163,7 +173,10 @@ function Home() {
               )}
 
               {filteredCategory && filteredCategory.length >= 6 ? (
-                <button className="bg-black text-white h-[40px] w-[270px]  rounded-bl-2xl rounded-tr-2xl cursor-pointer hover:opacity-85 ">Ver todos os produtos</button>
+                <Link to="produtos" state={{ products: allfilteredCategory }}>
+                  <button className="bg-black text-white h-[40px] w-[270px]  rounded-bl-2xl rounded-tr-2xl cursor-pointer hover:opacity-85 ">Ver todas as camisetas</button>
+                </Link>
+
               ) : null}
             </div>
             <img

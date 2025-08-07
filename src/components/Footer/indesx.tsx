@@ -2,7 +2,7 @@ import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#252525] text-white py-8 mt-12">
+    <footer className="bg-[#252525] text-white py-8 mt-12 w-full">
       <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-8">
         
         {/* Logo */}

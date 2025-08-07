@@ -4,6 +4,7 @@ import Admin from "@/pages/admin";
 import InfoProduct from "@/pages/informationProduct";
 import SignIn from "@/pages/SignIn";
 import SignUp from "@/pages/SignUp";
+import AllProduct from "@/pages/allProducts";
 
 export default function AppRoutes() {
   return (
@@ -13,6 +14,7 @@ export default function AppRoutes() {
       <Route path="/produto/:id" element={<InfoProduct />} />
       <Route path="/Login" element={<SignIn />} />
       <Route path="/Cadastrar" element={<SignUp />} />
+      <Route path="/produtos" element={<AllProduct />} />
       {/* <Route path="*" element={<NotFound />} /> */}
     </Routes>
   );

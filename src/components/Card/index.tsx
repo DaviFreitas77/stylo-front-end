@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { TbShoppingCartUp } from "react-icons/tb";
-type CardProps = {
+export type CardProps = {
     id: number
     name: string,
     image: string,

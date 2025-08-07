@@ -3,7 +3,6 @@ import Card from "@/components/Card";
 import type { CardProps } from "@/components/Card";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer/indesx";
-import { Badge } from "@/components/ui/badge"
 import { useEffect } from "react";
 export default function AllProduct() {
 

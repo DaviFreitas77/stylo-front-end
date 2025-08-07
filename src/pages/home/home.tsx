@@ -2,7 +2,7 @@
 import Header from "@/components/Header"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-import { Link } from "react-router-dom";
+
 // CSS do Swiper
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -64,11 +64,11 @@ function Home() {
               </div>
 
               {limitProduct && limitProduct.length >= 6 && (
-                <Link to="produtos" state={{ products: products }}>
+                
                   <button
 
                     className="bg-black text-white h-[40px] w-[270px]  rounded-bl-2xl rounded-tr-2xl cursor-pointer hover:opacity-85 ">Ver todas as novidades</button>
-                </Link>
+               
               )}
 
             </div>
@@ -101,9 +101,9 @@ function Home() {
               )}
 
               {limitProduct && limitProduct.length >= 6 && (
-                <Link to="produtos" state={{ products: products }}>
+               
                   <button className="bg-black text-white h-[40px] w-[270px]  rounded-bl-2xl rounded-tr-2xl cursor-pointer hover:opacity-85 ">Ver todas as novidades</button>
-                </Link>
+     
 
               )}
             </div>
@@ -140,9 +140,9 @@ function Home() {
                 )}
               </div>
               {filteredCategory && filteredCategory.length >= 6 ? (
-                <Link to="produtos" state={{ products: allfilteredCategory }}>
+                
                   <button className="bg-black text-white h-[40px] w-[270px]  rounded-bl-2xl rounded-tr-2xl cursor-pointer hover:opacity-85 ">Ver todas as camisetas</button>
-                </Link>
+          
               ) : null}
 
             </div>
@@ -173,9 +173,9 @@ function Home() {
               )}
 
               {filteredCategory && filteredCategory.length >= 6 ? (
-                <Link to="produtos" state={{ products: allfilteredCategory }}>
+               
                   <button className="bg-black text-white h-[40px] w-[270px]  rounded-bl-2xl rounded-tr-2xl cursor-pointer hover:opacity-85 ">Ver todas as camisetas</button>
-                </Link>
+                
 
               ) : null}
             </div>

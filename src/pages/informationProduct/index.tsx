@@ -8,7 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import useRecomendation from "@/hooks/useRecomentation"
 import Card from "@/components/Card"
 import CardSlider from "@/components/CardSlider"
-
+import { Badge } from "@/components/ui/badge"
 export default function InfoProduct() {
     const { id } = useParams()
 
@@ -99,7 +99,7 @@ export default function InfoProduct() {
                 <div className="w-full lg:w-1/2 px-6 lg:px-12 py-6">
                     {product?.name ? (
                         <div>
-                           
+                            <Badge className="bg-amber-300" variant="default">{product.category}</Badge>
                             <p className="text-3xl lg:text-4xl font-semibold">{product?.name}</p>
                         </div>
                     ) : (
